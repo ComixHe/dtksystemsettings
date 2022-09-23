@@ -15,11 +15,12 @@ class DAccountsUserPrivate : public QObject
 {
     Q_OBJECT
 public:
-    explicit DAccountsUserPrivate(const QString &path, DAccountsUser *parent = nullptr);
-    virtual ~DAccountsUserPrivate();
+    explicit DAccountsUserPrivate(const QString &path, const QString &systemPath, DAccountsUser *parent = nullptr);
+    ~DAccountsUserPrivate() override;
 
     DAccountsUser *q_ptr;
     DUserInterface *m_dUserInter;
+    DSystemUserInterface *m_dSystemUserInter;
     Q_DECLARE_PUBLIC(DAccountsUser)
 };
 

@@ -32,34 +32,11 @@ QDBusArgument &operator<<(QDBusArgument &arg, const LoginHistory_p &history)
 const QDBusArgument &operator>>(const QDBusArgument &arg, ReminderInfo_p &info)
 {
     arg.beginStructure();
-
     arg >> info.userName;
-
-    arg.beginStructure();
-    arg >> info.spent.expired;
-    arg >> info.spent.inactive;
-    arg >> info.spent.lastChange;
-    arg >> info.spent.max;
-    arg >> info.spent.min;
-    arg >> info.spent.warn;
-    arg.endStructure();
-
-    arg.beginStructure();
-    arg >> info.currentLogin.address;
-    arg >> info.currentLogin.host;
-    arg >> info.currentLogin.inittabID;
-    arg >> info.currentLogin.line;
-    arg >> info.currentLogin.time;
-
-    arg >> info.lastLogin.address;
-    arg >> info.lastLogin.host;
-    arg >> info.lastLogin.inittabID;
-    arg >> info.lastLogin.line;
-    arg >> info.lastLogin.time;
-    arg.endStructure();
-
+    arg >> info.spent;
+    arg >> info.currentLogin;
+    arg >> info.lastLogin;
     arg >> info.failCountSinceLastLogin;
-
     arg.endStructure();
     return arg;
 }
@@ -67,34 +44,60 @@ const QDBusArgument &operator>>(const QDBusArgument &arg, ReminderInfo_p &info)
 QDBusArgument &operator<<(QDBusArgument &arg, ReminderInfo_p &info)
 {
     arg.beginStructure();
-
     arg << info.userName;
-
-    arg.beginStructure();
-    arg << info.spent.expired;
-    arg << info.spent.inactive;
-    arg << info.spent.lastChange;
-    arg << info.spent.max;
-    arg << info.spent.min;
-    arg << info.spent.warn;
-    arg.endStructure();
-
-    arg.beginStructure();
-    arg << info.currentLogin.address;
-    arg << info.currentLogin.host;
-    arg << info.currentLogin.inittabID;
-    arg << info.currentLogin.line;
-    arg << info.currentLogin.time;
-
-    arg << info.lastLogin.address;
-    arg << info.lastLogin.host;
-    arg << info.lastLogin.inittabID;
-    arg << info.lastLogin.line;
-    arg << info.lastLogin.time;
-    arg.endStructure();
-
+    arg << info.spent;
+    arg << info.currentLogin;
+    arg << info.lastLogin;
     arg << info.failCountSinceLastLogin;
+    arg.endStructure();
+    return arg;
+}
 
+const QDBusArgument &operator>>(const QDBusArgument &arg, LoginUtmpx_p &info)
+{
+    arg.beginStructure();
+    arg >> info.inittabID;
+    arg >> info.line;
+    arg >> info.host;
+    arg >> info.address;
+    arg >> info.time;
+    arg.endStructure();
+    return arg;
+}
+
+QDBusArgument &operator<<(QDBusArgument &arg, const LoginUtmpx_p &info)
+{
+    arg.beginStructure();
+    arg << info.inittabID;
+    arg << info.line;
+    arg << info.host;
+    arg << info.address;
+    arg << info.time;
+    arg.endStructure();
+    return arg;
+}
+
+const QDBusArgument &operator>>(const QDBusArgument &arg, ShadowInfo_p &info)
+{
+    arg.beginStructure();
+    arg >> info.lastChange;
+    arg >> info.min;
+    arg >> info.max;
+    arg >> info.warn;
+    arg >> info.inactive;
+    arg >> info.expired;
+    arg.endStructure();
+    return arg;
+}
+QDBusArgument &operator<<(QDBusArgument &arg, const ShadowInfo_p &info)
+{
+    arg.beginStructure();
+    arg << info.lastChange;
+    arg << info.min;
+    arg << info.max;
+    arg << info.warn;
+    arg << info.inactive;
+    arg << info.expired;
     arg.endStructure();
     return arg;
 }

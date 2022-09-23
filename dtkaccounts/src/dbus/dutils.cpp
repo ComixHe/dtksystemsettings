@@ -5,7 +5,10 @@
 #include "dutils.h"
 #include "passwd.h"
 #include "../dglobalconfig.h"
+#include <qdebug.h>
 #include <qfileinfo.h>
+#include <sys/stat.h>
+#include <cstring>
 
 DACCOUNTS_BEGIN_NAMESPACE
 
@@ -126,6 +129,16 @@ qint64 Dutils::setUserConfigValue(const QByteArray &username, keyType key, const
     if (configFile.write(QByteArray(line.size(), ' ')) != line.size()) {}
     QString newline = strkey + "=" + value;
     return configFile.write(newline.toUtf8());
+}
+
+qint64 Dutils::getCreatedTimeFromFile(const QString &file)
+{
+    auto *info = static_cast<struct stat *>(malloc(sizeof(struct stat)));
+    if (stat(file.toUtf8(), info) == -1) {
+        qWarning() << strerror(errno);
+        return 0;
+    }
+    return info->st_ctim.tv_sec;
 }
 
 DACCOUNTS_END_NAMESPACE

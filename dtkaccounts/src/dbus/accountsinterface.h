@@ -4,7 +4,7 @@
 
 #pragma once
 
-#include "namespace.h"
+#include "../../include/namespace.h"
 #include "ddbusinterface.h"
 #include <QObject>
 #include <QString>
@@ -15,13 +15,13 @@
 
 DACCOUNTS_BEGIN_NAMESPACE
 
-class DAccounts : public QObject
+class DAccountsInterface : public QObject
 {
     Q_OBJECT
 
 public:
-    explicit DAccounts(QObject *parent = nullptr);
-    virtual ~DAccounts() = default;
+    explicit DAccountsInterface(QObject *parent = nullptr);
+    ~DAccountsInterface() override;
 
     Q_PROPERTY(QString daemonVersion READ daemonVersion)
     QString daemonVersion() const;
@@ -30,8 +30,8 @@ public slots:
     QDBusPendingReply<QDBusObjectPath> cacheUser(const QString &name);
     QDBusPendingReply<QDBusObjectPath> createUser(const QString &name, const QString &fullname, const qint32 accountType);
     QDBusPendingReply<void> deleteUser(const qint64 id, const bool removeFiles);
-    QDBusPendingReply<QString> findUserById(const qint64 id);
-    QDBusPendingReply<QString> findUserByName(const QString &name);
+    QDBusPendingReply<QDBusObjectPath> findUserById(const qint64 id);
+    QDBusPendingReply<QDBusObjectPath> findUserByName(const QString &name);
     QDBusPendingReply<QList<QDBusObjectPath>> listCachedUsers();
     QDBusPendingReply<void> uncacheUser(const QString &name);
 
@@ -40,8 +40,8 @@ signals:
     void ReceivedUserDeleted(QString path);
 
 private slots:
-    void receiveUserAdded(QDBusObjectPath user);
-    void receiveUserDeleted(QDBusObjectPath user);
+    void receiveUserAdded(const QDBusObjectPath &user);
+    void receiveUserDeleted(const QDBusObjectPath &user);
 
 private:
     QScopedPointer<DDBusInterface> m_inter;

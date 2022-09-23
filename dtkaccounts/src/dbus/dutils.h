@@ -4,8 +4,8 @@
 
 #pragma once
 
-#include "namespace.h"
-#include "daccountstypes.h"
+#include "../../include/namespace.h"
+#include "../../include/daccountstypes.h"
 #include <QString>
 #include <QDir>
 #include <QMimeDatabase>
@@ -22,6 +22,7 @@ struct Dutils
     static QString getUserConfigValue(const QByteArray &username, keyType key);
     static QString getUserConfigKey(keyType type);
     static qint64 setUserConfigValue(const QByteArray &username, keyType key, const QByteArray &value);
+    static qint64 getCreatedTimeFromFile(const QString &file);
 };
 
 DACCOUNTS_END_NAMESPACE

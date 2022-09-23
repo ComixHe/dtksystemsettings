@@ -5,7 +5,7 @@
 #pragma once
 
 #include "namespace.h"
-#include <qdbusargument.h>
+#include <QDBusArgument>
 #include <qglobal.h>
 #include <qmap.h>
 #include <qvariant.h>
@@ -54,13 +54,15 @@ struct ReminderInfo_p
 const QDBusArgument &operator>>(const QDBusArgument &arg, LoginHistory_p &history);
 QDBusArgument &operator<<(QDBusArgument &arg, const LoginHistory_p &history);
 
-const QDBusArgument &operator>>(const QDBusArgument &arg, ReminderInfo_p &history);
-QDBusArgument &operator<<(QDBusArgument &arg, const ReminderInfo_p &history);
+const QDBusArgument &operator>>(const QDBusArgument &arg, ReminderInfo_p &info);
+QDBusArgument &operator<<(QDBusArgument &arg, const ReminderInfo_p &info);
 
-const QDBusArgument &operator>>(const QDBusArgument &arg, ShadowInfo_p &history);
-QDBusArgument &operator<<(QDBusArgument &arg, const ShadowInfo_p &history);
+const QDBusArgument &operator>>(const QDBusArgument &arg, ShadowInfo_p &info);
+QDBusArgument &operator<<(QDBusArgument &arg, const ShadowInfo_p &info);
+
+const QDBusArgument &operator>>(const QDBusArgument &arg, LoginUtmpx_p &info);
+QDBusArgument &operator<<(QDBusArgument &arg, const LoginUtmpx_p &info);
 DACCOUNTS_END_NAMESPACE
 
 Q_DECLARE_METATYPE(DACCOUNTS_NAMESPACE::LoginHistory_p)
-Q_DECLARE_METATYPE(DACCOUNTS_NAMESPACE::ReminderInfo_p)
-Q_DECLARE_METATYPE(DACCOUNTS_NAMESPACE::ShadowInfo_p)
+Q_DECLARE_METATYPE(DACCOUNTS_NAMESPACE::ReminderInfo_p) Q_DECLARE_METATYPE(DACCOUNTS_NAMESPACE::ShadowInfo_p)

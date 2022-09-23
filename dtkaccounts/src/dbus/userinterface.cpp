@@ -34,7 +34,7 @@ QList<LoginHistory> DUserInterface::loginHistorys() const
         LoginHistory history;
         history.loginTime = history_p.loginTime;
         history.logoutTime = history_p.logoutTime;
-        history.sessionInfo = std::move(history_p.sessionInfo);
+        history.sessionInfo = history_p.sessionInfo;
         loginHistory.push_back(std::move(history));
     }
     return loginHistory;

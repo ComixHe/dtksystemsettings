@@ -4,7 +4,6 @@
 
 #pragma once
 
-#include <QtGlobal>
 #include <QList>
 #include <QObject>
 #include <QScopedPointer>
@@ -21,7 +20,7 @@ class DUserInterface : public QObject
 
 public:
     explicit DUserInterface(const QString &path, QObject *parent = nullptr);
-    virtual ~DUserInterface() = default;
+    ~DUserInterface() override;
 
     Q_PROPERTY(QList<LoginHistory> LoginHistory READ loginHistorys)
     Q_PROPERTY(bool automaticLogin READ automaticLogin)
